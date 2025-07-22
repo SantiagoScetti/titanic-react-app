@@ -1,0 +1,35 @@
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px;
+  background: linear-gradient(135deg, #1a252f, #2d4a5a); /* Gradiente suave */
+  color: rgba(255, 255, 255, 0.9); /* Texto blanco con opacidad */
+  position: relative;
+}
+
+.heroSection {
+  text-align: left;
+  max-width: 50%;
+ margin: 0 auto;
+}
+
+.hero h1 {
+  font-size: 3.5em;
+  color: #ffffff;
+  text-transform: uppercase;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Sombra suave */
+}
+
+.hero p {
+  font-size: 1.2em;
+  color: rgba(255, 255, 255, 0.7); /* Texto más claro con opacidad */
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); /* Sombra suave */
+}
+
+.hero img {
+  max-width: 40%;
+  height: auto;
+  object-fit: cover;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para integrar la imagen */
+}
