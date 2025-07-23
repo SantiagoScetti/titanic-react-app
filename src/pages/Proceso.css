@@ -1,0 +1,122 @@
+/* Contenedor principal */
+.proceso {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.7;
+    font-size: 1.1rem;
+    color: #f0f0f0;
+}
+
+/* Títulos */
+.proceso h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #ffffff;
+}
+
+.proceso h2 {
+    font-size: 1.8rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: #ffd166;
+}
+
+.proceso h3 {
+    font-size: 1.3rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #fcbf49;
+}
+
+/* Párrafos */
+.proceso p {
+    margin-bottom: 1rem;
+}
+
+.proceso .intro {
+    font-size: 1.2rem;
+    color: #d3d3d3;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* Listas */
+.proceso ul,
+.proceso ol {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+}
+
+.proceso li {
+    margin-bottom: 0.5rem;
+}
+
+/* Secciones especiales */
+.proceso .ventajas {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+    border-left: 4px solid #06d6a0;
+}
+
+.proceso .resultados {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-top: 2rem;
+    border-left: 4px solid #118ab2;
+}
+
+/* Código */
+.proceso pre {
+    background: #1e2d3a;
+    padding: 1rem;
+    border-radius: 5px;
+    overflow-x: auto;
+    margin: 1rem 0;
+    color: #e0e0e0;
+}
+
+.proceso code {
+    font-family: 'Courier New', monospace;
+    font-size: 0.95rem;
+    color: #ffd166;
+}
+
+/* Imágenes y figuras */
+.proceso figure {
+    margin: 1.5rem 0;
+    text-align: center;
+}
+
+.proceso img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0 2px 12px rgba(255, 255, 255, 0.1);
+}
+
+.proceso figcaption {
+    margin-top: 0.5rem;
+    font-style: italic;
+    color: #cccccc;
+    font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .proceso {
+        padding: 1rem;
+    }
+
+    .proceso h1 {
+        font-size: 2rem;
+    }
+
+    .proceso h2 {
+        font-size: 1.5rem;
+    }
+}

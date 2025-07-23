@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Hero from '../components/Hero/Hero';
 import Form from '../features/form/Form';
-import Nav from '../components/nav/Nav';
+
 import Result from '../features/Result/Result';
 import './home.css'
 
@@ -32,7 +32,7 @@ function Home() {
 
   return (
     <>
-      <Nav />
+      
       <Hero />
       {error && <p className="error">{error}</p>}
       <Form onSubmit={handlePrediction} />
