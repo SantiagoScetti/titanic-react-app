@@ -84,28 +84,36 @@ function Form({ onSubmit }) {
 
   // Manejar cambios en el formulario
   const handleChange = (e) => {
-  const { name, value } = e.target;
-  if (name === 'Age') {
-    // Mapear el rango seleccionado a un valor representativo
-    const ageMap = {
-      '0': '16',
-      '1': '18.0625',
-      '2': '22.0625',
-      '3': '26',
-      '4': '30.156',
-      '5': '35.156',
-      '6': '42.5',
-      '7': '63.5',
-      '8': '85'
-    };
-    setFormData({ ...formData, Age: ageMap[value], Age_Cut: value });
-  } else {
-    setFormData({ ...formData, [name]: value });
-  }
-};
+    const { name, value } = e.target;
+    if (name === 'Cabin_Assigned') {
+      // Si selecciona cualquier cabina (A-G), guardar la letra pero enviar "1" en el submit
+      setFormData({ ...formData, [name]: value });
+    } else if (name === 'Age') {
+      // Mapear el rango seleccionado a un valor representativo
+      const ageMap = {
+        '0': '16',
+        '1': '18.0625',
+        '2': '22.0625',
+        '3': '26',
+        '4': '30.156',
+        '5': '35.156',
+        '6': '42.5',
+        '7': '63.5',
+        '8': '85'
+      };
+      setFormData({ ...formData, Age: ageMap[value], Age_Cut: value });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
+  };
   // Calcular campos derivados
   const calculateDerivedFields = (data) => {
     const newData = { ...data };
+
+    // Convertir cabina a 1 o 0 para el envío
+    if (newData.Cabin_Assigned !== '0') {
+      newData.Cabin_Assigned = '1';
+    }
 
     // Age_Cut
     const age = parseFloat(data.Age);
@@ -272,13 +280,13 @@ function Form({ onSubmit }) {
         </label>
         <select name="Cabin_Assigned" value={formData.Cabin_Assigned} onChange={handleChange} className="form-select">
           <option value="0">Ninguna</option>
-          <option value="1">A</option>
-          <option value="1">B</option>
-          <option value="1">C</option>
-          <option value="1">D</option>
-          <option value="1">E</option>
-          <option value="1">F</option>
-          <option value="1">G</option>
+          <option value="A">A</option>
+          <option value="B">B</option>
+          <option value="C">C</option>
+          <option value="D">D</option>
+          <option value="E">E</option>
+          <option value="F">F</option>
+          <option value="G">G</option>
         </select>
         <div className="help-container">
           <input type="checkbox" id="cabin-help-toggle" className="help-toggle" />
@@ -288,7 +296,7 @@ function Form({ onSubmit }) {
               Seleccioná la cubierta de tu cabina (A-G) según su ubicación en el barco. "Ninguna" indica que no tenías cabina asignada o que no quieres elegir.
             </p>
             <img
-              src="/Titanic_cutaway_diagram.png"
+              src="/Titanic_cutaway_diagram.jpg"
               alt="Diagrama de cubiertas del Titanic"
               className="help-image"
             />
@@ -337,7 +345,7 @@ function Form({ onSubmit }) {
               ¿Sabías que tus chances de supervivencia variaban según el puerto de embarque? Los pasajeros de Cherburgo (Francia) tenían diferentes probabilidades en comparación con los de Queenstown (Irlanda) o Southampton (Inglaterra).
             </p>
             <img
-              src="/map.png"
+              src="/map.jpg"
               alt="Mapa de puertos de embarque del Titanic"
               className="help-image"
             />
