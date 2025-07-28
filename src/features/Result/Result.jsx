@@ -18,7 +18,7 @@ function Result({ data }) {
         await navigator.share({
           files: [file],
           title: '¿Sobrevivirías al Titanic?',
-          text: 'Este fue mi resultado en el simulador del Titanic. ¿Te animás a intentarlo?',
+          text: 'Este fue mi resultado en el simulador del Titanic. ¿Te animás a intentarlo? entra en https://titanic-frontend.netlify.app/',
         });
       } else {
         alert("Tu navegador no soporta compartir imágenes. Se abrirá la imagen para descargar.");
