@@ -48,6 +48,7 @@ function Nav() {
         <li><Link to="/" className="link" onClick={scrollToTop}>Test</Link></li>
         <li><Link to="/historia" className="link" onClick={scrollToTop}>Historia</Link></li>
         <li><Link to="/proceso" className="link" onClick={scrollToTop}>Mi proceso</Link></li>
+        <li><Link to="/proyecto" className="link" onClick={scrollToTop}>proyecto</Link></li>
       </ul>
     </nav>
   );

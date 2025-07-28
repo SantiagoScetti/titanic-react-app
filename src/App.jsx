@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Proceso from './pages/Proceso';
 import Nav from './components/nav/Nav';
 import Historia from './pages/Historia';
+import About from './pages/About';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/historia"element={<Historia />} />
           <Route path="/proceso" element={<Proceso />} />
+          <Route path="/proyecto" element={<About />} />
         </Routes>
       </div>
     </Router>
