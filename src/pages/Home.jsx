@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Hero from '../components/Hero/Hero';
 import Form from '../features/form/Form';
 
@@ -8,6 +8,17 @@ import './home.css'
 function Home() {
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
+  const resultRef = useRef(null);
+
+  // Scroll automático cuando aparece el resultado
+  useEffect(() => {
+    if (result && resultRef.current) {
+      resultRef.current.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'start' 
+      });
+    }
+  }, [result]);
 
   const handlePrediction = async (data) => {
   try {
@@ -36,7 +47,7 @@ function Home() {
       <Hero />
       {error && <p className="error">{error}</p>}
       <Form onSubmit={handlePrediction} />
-      {result && <Result data={result} />}
+      {result && <div ref={resultRef}><Result data={result} /></div>}
     </>
   );
 }

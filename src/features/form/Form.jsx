@@ -7,11 +7,11 @@ function Form({ onSubmit }) {
   const [formData, setFormData] = useState({
     name: '',
     Pclass: '3',
-    Age: '',
+    Age: '16', // Valor inicial para Age_Cut=0
     Fare: '',
     Cabin_Assigned: '0',
     Name_Size: '',
-    TicketNumberCounts: '1', // Valor fijo
+    TicketNumberCounts: '1',
     Sex: 'male',
     Embarked: 'S',
     Title: 'Mr',
@@ -71,8 +71,12 @@ function Form({ onSubmit }) {
           Pclass: ['1', '2', '3'],
           Sex: ['male', 'female'],
           Embarked: ['C', 'Q', 'S'],
-          Title: ['Dr', 'Master', 'Mr', 'married_women', 'military', 'nobility', 'religious', 'unmarried_women'], TicketLocation: ['A/4', 'A/5', 'CA', 'PC', 'SOTON/OQ', 'SC/Paris', 'W/C', 'Blank', 'C', 'F.C.', 'F.C.C.', 'Fa', 'P/PP', 'PP', 'S.C./A.4.', 'S.O./P.P.', 'S.O.C.', 'S.O.P.', 'S.P.', 'SC', 'SC/AH', 'SO/C', 'STON/O', 'STON/O2.', 'SW/PP', 'W.E.P.', 'WE/P', 'A4.', 'A/S', 'C.A./SOTON'],
+          Title: ['Dr', 'Master', 'Mr', 'married_women', 'military', 'nobility', 'religious', 'unmarried_women'],
+          TicketLocation: ['A/4', 'A/5', 'CA', 'PC', 'SOTON/OQ', 'SC/Paris', 'W/C', 'Blank', 'C', 'F.C.', 'F.C.C.', 'Fa', 'P/PP', 'PP', 'S.C./A.4.', 'S.O./P.P.', 'S.O.C.', 'S.O.P.', 'S.P.', 'SC', 'SC/AH', 'SO/C', 'STON/O', 'STON/O2.', 'SW/PP', 'W.E.P.', 'WE/P', 'A4.', 'A/S', 'C.A./SOTON'],
           Family_Size_Grouped: ['Alone', 'Small', 'Medium', 'Large'],
+          Age_Cut: ['0', '1', '2', '3', '4', '5', '6', '7'],
+          Fare_cut: ['0', '1', '2', '3', '4', '5', '6'],
+          Name_LengthGB: ['(11.999, 18.0]', '(18.0, 20.0]', '(20.0, 23.0]', '(23.0, 25.0]', '(25.0, 27.25]', '(27.25, 30.0]', '(30.0, 38.0]', '(38.0, 82.0]']
         });
       } finally {
         setIsLoading(false);
@@ -99,9 +103,8 @@ function Form({ onSubmit }) {
         '5': '35.156',
         '6': '42.5',
         '7': '63.5',
-        '8': '85'
       };
-      setFormData({ ...formData, Age: ageMap[value], Age_Cut: value });
+      setFormData({ ...formData, Age: ageMap[value] || '16', Age_Cut: value || '0' });
     } else {
       setFormData({ ...formData, [name]: value });
     }
@@ -125,8 +128,7 @@ function Form({ onSubmit }) {
     else if (age <= 32.312) newData.Age_Cut = '4';
     else if (age <= 38) newData.Age_Cut = '5';
     else if (age <= 47) newData.Age_Cut = '6';
-    else if (age <= 80) newData.Age_Cut = '7';
-    else newData.Age_Cut = '8';
+    else newData.Age_Cut = '7';
 
     // Fare_cut
     const fare = parseFloat(data.Fare);
@@ -230,7 +232,6 @@ function Form({ onSubmit }) {
           <option value="5">32 a 38 años</option>
           <option value="6">38 a 47 años</option>
           <option value="7">47 a 80 años</option>
-          <option value="8">Mayor a 80 años</option>
         </select>
       </div>
 
@@ -241,18 +242,17 @@ function Form({ onSubmit }) {
         </label>
         <select name="Fare" value={formData.Fare} onChange={handleChange} className="form-select" required>
           <option value="" disabled>Selecciona una tarifa</option>
-          <option value="7.0">Baja (hasta £7.77)</option>
-          <option value="8.0">Media-Baja (£7.77 - £8.66)</option>
-          <option value="12.0">Media (£8.66 - £14)</option>
-          <option value="20.0">Media-Alta (£14 - £26)</option>
-          <option value="40.0">Alta (£26 - £52)</option>
-          <option value="100.0">Muy Alta (£52 - £512)</option>
-          <option value="custom">Personalizada</option>
+          <option value="7.775">≤ 7.77 libras</option>
+          <option value="8.662">7.77 a 8.66 libras</option>
+          <option value="14.454">8.66 a 14.45 libras</option>
+          <option value="26">14.45 a 26 libras</option>
+          <option value="52.369">26 a 52 libras</option>
+          <option value="512.329">52 a 512 libras</option>
         </select>
         {formData.Fare === "custom" && (
           <input
             type="number"
-            name="Fare"
+            name="FareCustom"
             value={formData.FareCustom || ""}
             onChange={(e) => setFormData({ ...formData, FareCustom: e.target.value, Fare: e.target.value })}
             min="0"
@@ -262,6 +262,7 @@ function Form({ onSubmit }) {
             required
           />
         )}
+
         <div className="help-container">
           <input type="checkbox" id="fare-help-toggle" className="help-toggle" />
           <label htmlFor="fare-help-toggle" className="help-icon">💡</label>
