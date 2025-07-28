@@ -81,12 +81,28 @@ function Form({ onSubmit }) {
     fetchCategories();
   }, []);
 
+
   // Manejar cambios en el formulario
   const handleChange = (e) => {
-    const { name, value } = e.target;
+  const { name, value } = e.target;
+  if (name === 'Age') {
+    // Mapear el rango seleccionado a un valor representativo
+    const ageMap = {
+      '0': '16',
+      '1': '18.0625',
+      '2': '22.0625',
+      '3': '26',
+      '4': '30.156',
+      '5': '35.156',
+      '6': '42.5',
+      '7': '63.5',
+      '8': '85'
+    };
+    setFormData({ ...formData, Age: ageMap[value], Age_Cut: value });
+  } else {
     setFormData({ ...formData, [name]: value });
-  };
-
+  }
+};
   // Calcular campos derivados
   const calculateDerivedFields = (data) => {
     const newData = { ...data };
@@ -135,6 +151,7 @@ function Form({ onSubmit }) {
     return newData;
   };
 
+
   // Enviar datos
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -158,20 +175,26 @@ function Form({ onSubmit }) {
       <h2>¿Sobrevivirías al Titanic?</h2>
       {error && <p className="error">{error}</p>}
 
-      <div>
-        <label>Nombre (opcional):</label>
+      <div className="form-group">
+        <label className="form-label">
+          <span className="label-icon">📝</span>Nombre
+        </label>
         <input
           type="text"
           name="name"
           value={formData.name}
           onChange={handleChange}
           placeholder="Ej. Kelly, Mr. James"
+          className="form-input"
         />
       </div>
 
-      <div>
-        <label>Clase (Pclass):</label>
-        <select name="Pclass" value={formData.Pclass} onChange={handleChange}>
+      <div className="form-group">
+        <label className="form-label">
+          <span className="label-icon">🏛️</span>
+          Clase
+        </label>
+        <select name="Pclass" value={formData.Pclass} onChange={handleChange} className="form-select">
           {categories.Pclass?.map((option) => (
             <option key={option} value={option}>
               {option === '1' ? 'Primera clase' : option === '2' ? 'Segunda clase' : 'Tercera clase'}
@@ -184,24 +207,29 @@ function Form({ onSubmit }) {
         </select>
       </div>
 
-      <div>
-        <label>Edad (Age):</label>
-        <input
-          type="number"
-          name="Age"
-          value={formData.Age}
-          onChange={handleChange}
-          min="0"
-          max="80"
-          step="0.1"
-          required
-        />
+      <div className="form-group">
+        <label className="form-label">
+          <span className="label-icon">🎂</span>
+          Rango de Edad
+        </label>
+        <select name="Age" value={formData.Age_Cut} onChange={handleChange} className="form-select" required>
+          <option value="" disabled>Selecciona un rango de edad</option>
+          <option value="0">Menor o igual a 16 años</option>
+          <option value="1">16 a 20 años</option>
+          <option value="2">20 a 24 años</option>
+          <option value="3">24 a 28 años</option>
+          <option value="4">28 a 32 años</option>
+          <option value="5">32 a 38 años</option>
+          <option value="6">38 a 47 años</option>
+          <option value="7">47 a 80 años</option>
+          <option value="8">Mayor a 80 años</option>
+        </select>
       </div>
 
       <div className="form-group">
         <label className="form-label">
           <span className="label-icon">💵</span>
-          Tarifa (Fare):
+          Tarifa:
         </label>
         <select name="Fare" value={formData.Fare} onChange={handleChange} className="form-select" required>
           <option value="" disabled>Selecciona una tarifa</option>
@@ -268,9 +296,12 @@ function Form({ onSubmit }) {
         </div>
       </div>
 
-      <div>
-        <label>Sexo (Sex):</label>
-        <select name="Sex" value={formData.Sex} onChange={handleChange}>
+      <div className="form-group">
+        <label className="form-label">
+          <span className="label-icon">🚻</span>
+          Sexo
+        </label>
+        <select name="Sex" value={formData.Sex} onChange={handleChange} className="form-select">
           {categories.Sex?.map((option) => (
             <option key={option} value={option}>
               {option === 'male' ? 'Hombre' : 'Mujer'}
@@ -285,7 +316,7 @@ function Form({ onSubmit }) {
       <div className="form-group">
         <label className="form-label">
           <span className="label-icon">🛳️</span>
-          Puerto de embarque (Embarked):
+          Puerto de embarque:
         </label>
         <select name="Embarked" value={formData.Embarked} onChange={handleChange} className="form-select">
           {categories.Embarked?.map((option) => (
@@ -368,7 +399,7 @@ function Form({ onSubmit }) {
       <div className="form-group">
         <label className="form-label">
           <span className="label-icon">🎫</span>
-          Ubicación del ticket (TicketLocation):
+          Ubicación del ticket:
         </label>
         <select name="TicketLocation" value={formData.TicketLocation} onChange={handleChange} className="form-select">
           {categories.TicketLocation?.map((option) => (
@@ -390,9 +421,12 @@ function Form({ onSubmit }) {
         </div>
       </div>
 
-      <div>
-        <label>Tamaño de la familia:</label>
-        <select name="Family_Size_Grouped" value={formData.Family_Size_Grouped} onChange={handleChange}>
+      <div className="form-group">
+        <label className="form-label">
+          <span className="label-icon">👨‍👩‍👧‍👦</span>
+          Tamaño de la familia con la que viajas
+        </label>
+        <select name="Family_Size_Grouped" value={formData.Family_Size_Grouped} onChange={handleChange} className="form-select">
           {categories.Family_Size_Grouped?.map((option) => (
             <option key={option} value={option}>
               {option === 'Alone' ? 'Solo (1 persona)' :

@@ -1,21 +1,100 @@
-.result-container {
-  max-width: 600px;
-  margin: 20px auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #e8f8f5;
+.result-card {
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   text-align: center;
+  color: #fff;
+  transition: all 0.3s ease;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.result-container h3 {
-  margin-bottom: 15px;
+.result-card.survived {
+  background: linear-gradient(135deg, #14532d, #166534);
 }
 
-.result-container p {
+.result-card.not-survived {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+}
+
+.result-card h2 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.result-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.result-card .message {
+  font-size: 1.2rem;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+}
+
+.result-stats p {
   margin: 10px 0;
+  font-size: 1rem;
 }
 
-.result-container strong {
+.result-stats span {
+  font-weight: 600;
+}
+
+.share-hint {
+  margin-top: 20px;
+  font-size: 0.95rem;
+  opacity: 0.85;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 0.75rem;
+  border-radius: 10px;
+}
+
+.share-btn {
+  margin-top: 20px;
+  padding: 12px 20px;
+  background-color: #ffffff;
   color: #2c3e50;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.share-btn:hover {
+  background-color: #f1f1f1;
+}
+
+.probability-bar {
+  display: flex;
+  height: 30px;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 12px 0;
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: white;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+}
+
+.bar-survive,
+.bar-die {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  transition: width 0.5s ease;
+}
+
+.bar-survive {
+  background-color: #4caf50; /* verde */
+}
+
+.bar-die {
+  background-color: #f44336; /* rojo */
 }

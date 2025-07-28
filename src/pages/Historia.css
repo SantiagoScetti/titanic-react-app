@@ -1,0 +1,116 @@
+/* Contenedor principal */
+.historia {
+    padding: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    line-height: 1.7;
+    font-size: 1.1rem;
+    color: #f0f0f0;
+}
+
+.portada {
+    max-width: 600px;
+}
+
+/* Títulos */
+.historia h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #ffffff;
+}
+
+.historia h2 {
+    font-size: 1.8rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: #ffd166;
+}
+
+/* Párrafos */
+.historia p {
+    margin-bottom: 1rem;
+}
+
+.historia .intro {
+    font-size: 1.2rem;
+    color: #d3d3d3;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* Listas */
+.historia ul,
+.historia ol {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+}
+
+.historia li {
+    margin-bottom: 0.5rem;
+}
+
+/* Secciones especiales */
+.historia .stats {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+    border-left: 4px solid #06d6a0;
+}
+
+/* Imágenes y figuras */
+.historia figure {
+    margin: 1.5rem 0;
+    text-align: center;
+}
+
+.historia img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0 2px 12px rgba(255, 255, 255, 0.1);
+}
+
+.historia figcaption {
+    margin-top: 0.5rem;
+    font-style: italic;
+    color: #cccccc;
+    font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .historia {
+        padding: 1rem;
+    }
+
+    .historia h1 {
+        font-size: 2rem;
+    }
+
+    .historia h2 {
+        font-size: 1.3rem;
+    }
+
+    .historia p {
+        font-size: 0.90rem; /* Reducir tamaño de párrafos */
+    }
+
+    .historia ul,
+    .historia ol {
+        font-size: 0.90rem; /* Reducir tamaño de listas */
+    }
+
+    .historia li {
+        font-size: 0.80rem; /* Reducir tamaño de ítems de lista */
+    }
+
+    .historia .intro {
+        font-size: 1rem; /* Reducir tamaño del texto introductorio */
+    }
+
+    .historia figcaption {
+        font-size: 0.7rem; /* Reducir tamaño de los captions */
+    }
+}

@@ -1,7 +1,7 @@
 /* Contenedor principal */
 .proceso {
     padding: 2rem;
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
     line-height: 1.7;
     font-size: 1.1rem;
@@ -53,6 +53,18 @@
     margin-bottom: 0.5rem;
 }
 
+.proceso .transformaciones {
+    margin-top: 0.8rem;
+    padding: 1rem;
+    border-radius: 5px;
+    border-left: 4px solid #007bff;
+    background-color: #2d5a72;
+}
+
+.proceso .transformaciones li {
+    margin-bottom: 0.7rem;
+    list-style: none;
+}
 /* Secciones especiales */
 .proceso .ventajas {
     background: rgba(255, 255, 255, 0.05);
@@ -118,5 +130,34 @@
 
     .proceso h2 {
         font-size: 1.5rem;
+    }
+
+    .proceso h3 {
+        font-size: 1.1rem;
+    }
+
+    .proceso p {
+        font-size: 0.95rem;
+    }
+
+    .proceso ul,
+    .proceso ol {
+        font-size: 0.95rem;
+    }
+
+    .proceso li {
+        font-size: 0.95rem;
+    }
+
+    .proceso .intro {
+        font-size: 1rem;
+    }
+
+    .proceso figcaption {
+        font-size: 0.8rem;
+    }
+
+    .proceso code {
+        font-size: 0.85rem;
     }
 }

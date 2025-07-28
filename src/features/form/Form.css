@@ -168,6 +168,10 @@
 
 /* Estilos para pantallas pequeñas */
 @media (max-width: 768px) {
+   .form-container h2 {
+    font-size: 1.5rem;
+  }
+  
   .form-group {
     max-width: 100%;
   }
@@ -178,6 +182,9 @@
   
   .help-container {
     padding: 0; /* Removido padding duplicado */
+  }
+  .form-label{
+    font-size: 14px;
   }
   
   .help-icon {
