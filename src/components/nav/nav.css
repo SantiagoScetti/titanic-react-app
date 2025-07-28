@@ -5,14 +5,14 @@
   position: sticky; /* Hace que se quede fijo en la parte superior */
   top: 0;
   z-index: 1000; /* Asegura que esté por encima de otros elementos */
-  transition: padding 0.3s ease, box-shadow 0.3s ease; /* Suaviza la transición */
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Transición más suave */
   box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Sombra sutil */
 }
 
 .nav.scrolled {
   padding: 8px 10px; /* Padding más pequeño cuando se hace scroll */
   box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Sombra más pronunciada */
-  
+  background-color: #34495e; /* Color ligeramente diferente para mayor contraste */
 }
 
 .list {
@@ -31,6 +31,7 @@
   font-weight: 700;
   color: white;
   padding: 5px 0; 
+  transition: color 0.3s ease; /* Suaviza el cambio de color si lo usas */
 }
 
 .link::before {

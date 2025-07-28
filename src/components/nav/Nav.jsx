@@ -6,12 +6,18 @@ function Nav() {
   const navRef = useRef(null);
   const ticking = useRef(false);
 
-  // Función optimizada con requestAnimationFrame
+  // Función optimizada con requestAnimationFrame y histéresis
   const updateNavbar = useCallback(() => {
     if (navRef.current) {
-      if (window.scrollY > 50) {
+      const scrollY = window.scrollY;
+      const isScrolled = navRef.current.classList.contains('scrolled');
+      
+      // Histéresis: diferentes umbrales para añadir y quitar
+      if (!isScrolled && scrollY > 80) {
+        // Añadir la clase cuando pasa de 80px
         navRef.current.classList.add('scrolled');
-      } else {
+      } else if (isScrolled && scrollY < 20) {
+        // Quitar la clase cuando baja de 20px
         navRef.current.classList.remove('scrolled');
       }
     }
@@ -48,7 +54,6 @@ function Nav() {
         <li><Link to="/" className="link" onClick={scrollToTop}>Test</Link></li>
         <li><Link to="/historia" className="link" onClick={scrollToTop}>Historia</Link></li>
         <li><Link to="/proceso" className="link" onClick={scrollToTop}>Mi proceso</Link></li>
-        <li><Link to="/proyecto" className="link" onClick={scrollToTop}>proyecto</Link></li>
       </ul>
     </nav>
   );
