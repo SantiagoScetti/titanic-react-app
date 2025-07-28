@@ -7,28 +7,51 @@ function Result({ data }) {
   const resultRef = useRef();
 
   const handleShare = async () => {
-    const element = resultRef.current;
+  const element = resultRef.current;
 
-    try {
-      const canvas = await html2canvas(element, { scale: 2 });
-      const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
-      const file = new File([blob], 'titanic_result.png', { type: 'image/png' });
+  try {
+    // Capturamos el contenido original
+    const canvasOriginal = await html2canvas(element, { scale: 2 });
+    
+    // Creamos un nuevo canvas donde dibujaremos la imagen + texto
+    const finalCanvas = document.createElement("canvas");
+    finalCanvas.width = canvasOriginal.width;
+    finalCanvas.height = canvasOriginal.height;
+    const ctx = finalCanvas.getContext("2d");
 
-      if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        await navigator.share({
-          files: [file],
-          title: '¿Sobrevivirías al Titanic?',
-          text: 'Este fue mi resultado en el simulador del Titanic. ¿Te animás a intentarlo? entra en https://titanic-frontend.netlify.app/',
-        });
-      } else {
-        alert("Tu navegador no soporta compartir imágenes. Se abrirá la imagen para descargar.");
-        const url = URL.createObjectURL(blob);
-        window.open(url);
-      }
-    } catch (err) {
-      console.error("Error al compartir:", err);
+    // Dibujamos la imagen original
+    ctx.drawImage(canvasOriginal, 0, 0);
+
+    // Agregamos texto en la parte inferior
+    const padding = 40;
+    ctx.fillStyle = "rgba(0, 0, 0, 0.6)";
+    ctx.fillRect(0, finalCanvas.height - padding, finalCanvas.width, padding);
+
+    ctx.fillStyle = "#fff";
+    ctx.font = "bold 28px Arial";
+    ctx.textAlign = "center";
+    ctx.fillText("Simulador del Titanic - https://titanic-frontend.netlify.app/", finalCanvas.width / 2, finalCanvas.height - 10);
+
+    // Convertimos a blob y compartimos
+    const blob = await new Promise(resolve => finalCanvas.toBlob(resolve, 'image/png'));
+    const file = new File([blob], 'titanic_result.png', { type: 'image/png' });
+
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      await navigator.share({
+        files: [file],
+        title: '¿Sobrevivirías al Titanic?',
+        text: '',
+      });
+    } else {
+      alert("Tu navegador no soporta compartir imágenes. Se abrirá la imagen para descargar.");
+      const url = URL.createObjectURL(blob);
+      window.open(url);
     }
-  };
+  } catch (err) {
+    console.error("Error al compartir:", err);
+  }
+};
+
 
   return (
     <div className={`result-card ${survived ? 'survived' : 'not-survived'}`} ref={resultRef}>
@@ -63,7 +86,7 @@ function Result({ data }) {
 
 
       <div className="share-hint" onClick={handleShare} style={{ cursor: 'pointer' }}>
-        📲 Compartí tu resultado y desafiá a tus amigos
+        📲 Compartí tu resultado y desafiá a tus amigos en https://my-titanic-analisis.netlify.app/
       </div>
     </div>
   );
